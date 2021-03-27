@@ -1,4 +1,5 @@
 import React from 'react'
+import movieService from '../services/movies-service'
 
 const Search = () => {
   return (
