@@ -1,18 +1,35 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {Link, useParams} from "react-router-dom";
+import movieService from '../services/movies-service'
 
 const Details = () => {
+  const[movie, setMovie] = useState({})
+  const {imdbID} = useParams();
+
+  useEffect(() => {
+    movieService.findMovieById(imdbID)
+    .then(movie => setMovie(movie))
+  })
+
   return (
-      <div>
-        <h1>Details</h1>
-        <img src="" alt=""/>
+      <div className="container-fluid">
+        <h1>{movie.Title}</h1>
+
+        <img src={movie.Poster}/>
+        <h2>Plot:</h2>
         <p>
-          plot
+          {movie.Plot}
         </p>
-        <ul>
-          <li>Emma Stone</li>
-          <li>Mark Hamil</li>
-          <li>Harry Zhang</li>
+        <h2>Cast:</h2>
+        <ul className="list-group">
+          {
+            movie.Actors && movie.Actors.split(",").map(actor =>
+                <li className="list-group-item">
+                  {actor}
+                </li>)
+          }
         </ul>
+        {JSON.stringify(movie)}
       </div>
   )
 }

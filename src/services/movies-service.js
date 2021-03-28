@@ -1,5 +1,5 @@
 export const findMovieByTitle = (title) =>
-    fetch(`http://www.omdbapi.com/?t=${title}&apikey=91790e2e`)
+    fetch(`http://www.omdbapi.com/?s=${title}&apikey=91790e2e`)
 .then(response => response.json())
 
 export const findMovieById = (imdbID) =>
